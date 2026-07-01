@@ -1,7 +1,12 @@
 # High jump tracker v1.0 by Maxim Szeto
 
 # holds all of the high jump logs
-highJumpLog = []
+highJumpLog = {
+    
+    "height": [],
+    "date": []
+    
+}
 
 
 askUserName = input("Welcome to Maxim's High jump App! Please enter your name: ")
@@ -40,19 +45,19 @@ def main():
                     print("\nYou cant jump negative meters dude.")
 
                 elif newlog <= 1.00:
-                    highJumpLog.append(newlog)
+                    highJumpLog["height"].append(newlog)
                     print("\nAdded to log")
                     print(f"Good start. {newlog} meters is good but you can do better\n")
                 elif newlog <= 1.50:
-                    highJumpLog.append(newlog)
+                    highJumpLog["height"].append(newlog)
                     print("\nAdded to log")
                     print(f"that is pretty solid. {newlog} meters is solid\n")
                 elif newlog <= 2.00:
-                    highJumpLog.append(newlog)
+                    highJumpLog["height"].append(newlog)
                     print("\nAdded to log")
                     print(f"dang you jumping. {newlog} meters is good\n")
                 elif newlog >= 2.00:
-                    highJumpLog.append(newlog)
+                    highJumpLog["height"].append(newlog)
                     print("\nAdded to log")
                     print(f"Wowza. {newlog} meters is amazing\n")
                 
@@ -70,7 +75,7 @@ def main():
         elif userInput == "2":
             index = 1
             print("Here is your training log:\n")
-            for jump in highJumpLog:
+            for jump in highJumpLog["height"]:
                 print(f"Jump #{index}: {jump}m\n")
                 index += 1
             
@@ -110,17 +115,17 @@ def main():
 def calcAvgHJ():
     index = 0
     averageHeight = 0
-    for jump in highJumpLog: 
+    for jump in highJumpLog["height"]: 
         averageHeight += jump
         index += 1
-        averageHeight = averageHeight/index
+    averageHeight = averageHeight/index
     print("Your average jump height is... " + str(round(averageHeight, 2)) + " meters!\n")
     
 
 
 def calcPB():
     pb = 0
-    for jump in highJumpLog:
+    for jump in highJumpLog["height"]:
         if jump > pb:
             pb = jump
     print(f"Your Personal Best jump is {pb}m\n")
