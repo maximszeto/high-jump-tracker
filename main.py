@@ -1,4 +1,5 @@
 # High jump tracker v1.0 by Maxim Szeto
+import json
 
 # holds all of the high jump logs
 highJumpLog = {
@@ -7,6 +8,11 @@ highJumpLog = {
     "date": []
     
 }
+
+with open("high-jump-log.json", "r") as file:
+    highJumpLog = json.load(file)
+
+
 
 
 askUserName = input("Welcome to Maxim's High jump App! Please enter your name: ")
@@ -25,6 +31,9 @@ def main():
     
     # this input will keep showing up until the user desides to leave the app
     while userInput != "4":
+        with open("high-jump-log.json", "w") as file:
+            json.dump(highJumpLog, file)
+
         userInput = input("""Here is what you can do in the app:\n1. Add a new jump to your training log (in meters)
         \n2. View your training log
         \n3. View your personal best and when it was achieved

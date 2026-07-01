@@ -1,7 +1,9 @@
 Notes for main.py
 
 Improvements:
-Add major actions to be functions
+- Add major actions to be functions
+- Delete 
+
 
 Issues:
 #1 main function doesnt register 0 or -2 as out of range and still tells me that I did good
