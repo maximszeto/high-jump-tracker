@@ -27,11 +27,6 @@ except FileNotFoundError:
     pass
 
 
-averageHeight = 0
-index = 0
-userInput = 0
-pb = 0
-
 
 askUserName = input("Welcome to Maxim's High jump App! Please enter your name: ")
 if askUserName.lower() == "maxim":
@@ -49,9 +44,6 @@ def main():
     
     # this input will keep showing up until the user desides to leave the app
     while userInput != "5":
-        with open(file_path, "w") as file:
-            json.dump(highJumpLog, file)
-
         userInput = input("""\nHere is what you can do in the app:\n1. Add or delete a jump in your training log (in meters)
         \n2. View your training log
         \n3. View your average jump height and your personal best and when it was achieved
@@ -65,8 +57,8 @@ def main():
         log we will append the new log into the list that has all of the logs.
         '''
         if userInput == "1":
-            addOrDelte = input("\n1. Add a jump\n2. Delete a jump\nWould you like to: ")
-            if addOrDelte == "1":
+            addOrDelete = input("\n1. Add a jump\n2. Delete a jump\nWould you like to: ")
+            if addOrDelete == "1":
                 try:
                     newlog = float(input("\nIn meters what height did you achieve? "))
                     # newlog = f"{newlog:.2f}
@@ -102,22 +94,27 @@ def main():
                 they wanted gone minus one we delete it from the log
                 '''
 
-            elif addOrDelte == "2":
-                index = 1
-                print("Here is your training log:\n")
-                for jump in highJumpLog["height"]:
-                    print(f"Jump #{index}: {jump}m\n")
-                    index += 1   
-                deleteWhichJump = int(input("Which Jump would you like to delete?: "))
-                for jump in highJumpLog["height"]:
-                    if jump == highJumpLog["height"][deleteWhichJump - 1]:
-                        highJumpLog["height"].pop(deleteWhichJump - 1)
-                print(f"\nJump {deleteWhichJump} ({jump}m) has been deleted.\n")
-
+            elif addOrDelete == "2":
+                try:
+                    index = 1
+                    print("Here is your training log:\n")
+                    for jump in highJumpLog["height"]:
+                        print(f"Jump #{index}: {jump}m\n")
+                        index += 1   
+                    deleteWhichJump = int(input("Which Jump would you like to delete?: "))
+                    for jump in highJumpLog["height"]:
+                        if jump == highJumpLog["height"][deleteWhichJump - 1]:
+                            del highJumpLog["height"][deleteWhichJump - 1]
+                    print(f"\nJump {deleteWhichJump} ({jump}m) has been deleted.\n")
+                except IndexError:
+                    print(f"\nThere is no jump #{deleteWhichJump}")
 
             else:
                 print("Choose 1 or 2 dude")
-       
+
+            with open(file_path, "w") as file:
+                json.dump(highJumpLog, file)
+
             '''
             if the user inputs two we will print their training log by using an f string
             to show the jumps in a human readable manner. for each of the jumps in the highjump
@@ -185,7 +182,7 @@ def main():
         
         elif userInput == "5":
             print("\nThanks for using my app! Bye!\n")
-            exit()
+            return 
         
 
         else:
@@ -216,5 +213,9 @@ def calcGoal(userPB, goal):
     print(f"\nCurrent PB: {userPB}m")
     print(f"Goal: {goal}m")
     print(f"Progress: {userProgress}%")
+    
 
 main()
+
+if __name__ == "__main__":
+    main()
