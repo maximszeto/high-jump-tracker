@@ -1,6 +1,7 @@
 # High jump tracker v1.0 by Maxim Szeto
 import os
 import json
+import time
 
 # holds all of the high jump logs
 highJumpLog = {
@@ -27,13 +28,14 @@ except FileNotFoundError:
     pass
 
 
-
+os.system("clear")
 askUserName = input("Welcome to Maxim's High jump App! Please enter your name: ")
 if askUserName.lower() == "maxim":
     print("Developer mode activated! Welcome, Maxim!")
 else:
     print(f"Hello, {askUserName}! Thanks for using my High Jump App.")
-print("--------------------------------------------------------------")
+
+time.sleep(3)
 
 
 # main function controls the major functionings of the app
@@ -44,7 +46,8 @@ def main():
     
     # this input will keep showing up until the user desides to leave the app
     while userInput != "5":
-        userInput = input("""\nHere is what you can do in the app:\n1. Add or delete a jump in your training log (in meters)
+        os.system("clear")
+        userInput = input("""Here is what you can do in the app:\n1. Add or delete a jump in your training log (in meters)
         \n2. View your training log
         \n3. View your average jump height and your personal best and when it was achieved
         \n4. Add new goal and see progress
@@ -57,7 +60,8 @@ def main():
         log we will append the new log into the list that has all of the logs.
         '''
         if userInput == "1":
-            addOrDelete = input("\n1. Add a jump\n2. Delete a jump\nWould you like to: ")
+            os.system("clear")
+            addOrDelete = input("\n1. Add a jump\n2. Delete a jump\nWhat would you like to do?: ")
             if addOrDelete == "1":
                 try:
                     newlog = float(input("\nIn meters what height did you achieve? "))
@@ -85,7 +89,8 @@ def main():
                     
                 except ValueError:
                     print("Please input a number.\n")
-
+                
+                time.sleep(2)
                 '''
                 When we first ask them to delete a jump we first have to show them
                 there training log. Then we ask them which jump they want to delete
@@ -95,6 +100,7 @@ def main():
                 '''
 
             elif addOrDelete == "2":
+                os.system("clear")
                 try:
                     index = 1
                     print("Here is your training log:\n")
@@ -105,7 +111,9 @@ def main():
                     for jump in highJumpLog["height"]:
                         if jump == highJumpLog["height"][deleteWhichJump - 1]:
                             del highJumpLog["height"][deleteWhichJump - 1]
+                    os.system("clear")
                     print(f"\nJump {deleteWhichJump} ({jump}m) has been deleted.\n")
+                    time.sleep(2)
                 except IndexError:
                     print(f"\nThere is no jump #{deleteWhichJump}")
 
@@ -122,6 +130,7 @@ def main():
             '''
 
         elif userInput == "2":
+            os.system("clear")
             if highJumpLog["height"] != []:
                 index = 1
                 print("Here is your training log:\n")
@@ -131,7 +140,9 @@ def main():
             else:
                 print("\nYou have nothing in your training log\n")
             
-            
+            userExit = input("click e to exit: ")
+            if userExit == "e":
+                continue
             
             '''
             If the user presses 3 we first check if they have any jumps logged. if they do
@@ -143,15 +154,21 @@ def main():
             '''
 
         elif userInput == "3":
+            os.system("clear")
             if highJumpLog["height"] != []:
                 calcAvgHJ()
                 calcPB()
+
             else:
                 print("\nYou do not have any jumps logged\n")
-                
+            
+            userExit = input("click e to exit: ")
+            if userExit == "e":
+                continue
 
 
         elif userInput == "4":
+            os.system("clear")
             pb = 0
             for jump in highJumpLog["height"]:
                 if jump > pb:
@@ -160,8 +177,10 @@ def main():
                 userGoal = float(input("\nWhat is your high jump height goal?: "))
                 if userGoal <= 0.00:
                     print("\nYou cant jump negative meters dude.")
+                    continue
                 elif userGoal <= pb:
                     print("\nYou have already achieved that high of a jump\n")
+                    continue
                 elif pb / userGoal >= 0.95:
                     calcGoal(pb, userGoal)
                     print("This goal is within reach")
@@ -179,6 +198,9 @@ def main():
                             
             except ValueError:
                 print("Please input a number.\n")
+            userExit = input("\nclick e to exit: ")
+            if userExit == "e":
+                continue
         
         elif userInput == "5":
             print("\nThanks for using my app! Bye!\n")
