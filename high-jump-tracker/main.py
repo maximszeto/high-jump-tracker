@@ -65,7 +65,7 @@ def main():
             if addOrDelete == "1":
                 try:
                     newlog = float(input("\nIn meters what height did you achieve? "))
-                    # newlog = f"{newlog:.2f}
+                    newlog = round(newlog, 2)
 
                     if newlog <= 0.00:
                         print("\nYou cant jump negative meters dude.")
@@ -73,19 +73,19 @@ def main():
                     elif newlog <= 1.00:
                         highJumpLog["height"].append(newlog)
                         print("\nAdded to log")
-                        print(f"Good start. {newlog} meters is good but you can do better\n")
+                        print(f"Good start. {newlog:.2f} meters is good but you can do better\n")
                     elif newlog <= 1.50:
                         highJumpLog["height"].append(newlog)
                         print("\nAdded to log")
-                        print(f"that is pretty solid. {newlog} meters is solid\n")
+                        print(f"that is pretty solid. {newlog:.2f} meters is solid\n")
                     elif newlog <= 2.00:
                         highJumpLog["height"].append(newlog)
                         print("\nAdded to log")
-                        print(f"dang you jumping. {newlog} meters is good\n")
+                        print(f"dang you jumping. {newlog:.2f} meters is good\n")
                     elif newlog >= 2.00:
                         highJumpLog["height"].append(newlog)
                         print("\nAdded to log")
-                        print(f"Wowza. {newlog} meters is amazing\n")
+                        print(f"Wowza. {newlog:.2f} meters is amazing\n")
                     
                 except ValueError:
                     print("Please input a number.\n")
@@ -100,22 +100,34 @@ def main():
                 '''
 
             elif addOrDelete == "2":
-                os.system("clear")
-                try:
-                    index = 1
-                    print("Here is your training log:\n")
-                    for jump in highJumpLog["height"]:
-                        print(f"Jump #{index}: {jump}m\n")
-                        index += 1   
-                    deleteWhichJump = int(input("Which Jump would you like to delete?: "))
-                    for jump in highJumpLog["height"]:
-                        if jump == highJumpLog["height"][deleteWhichJump - 1]:
-                            del highJumpLog["height"][deleteWhichJump - 1]
+                
+                
+                if highJumpLog["height"] != []:
                     os.system("clear")
-                    print(f"\nJump {deleteWhichJump} ({jump}m) has been deleted.\n")
-                    time.sleep(2)
-                except IndexError:
-                    print(f"\nThere is no jump #{deleteWhichJump}")
+                    try:
+                        index = 1
+                        print("Here is your training log:\n")
+                        for jump in highJumpLog["height"]:
+                            print(f"Jump #{index}: {jump}m\n")
+                            index += 1   
+                        deleteWhichJump = int(input("Which Jump would you like to delete?: "))
+                        for jump in highJumpLog["height"]:
+                            if jump == highJumpLog["height"][deleteWhichJump - 1]:
+                                del highJumpLog["height"][deleteWhichJump - 1]
+                        os.system("clear")
+                        print(f"\nJump {deleteWhichJump} ({jump}m) has been deleted.\n")
+                        time.sleep(2)
+                    except IndexError:
+                        print(f"\nThere is no jump #{deleteWhichJump}")
+
+                else:
+                    os.system("clear")
+                    print("You have nothing in your high jump log")
+                    
+                    while True:
+                        userExit = input("click e to exit: ")
+                        if userExit == "e":
+                            break
 
             else:
                 print("Choose 1 or 2 dude")
@@ -135,14 +147,16 @@ def main():
                 index = 1
                 print("Here is your training log:\n")
                 for jump in highJumpLog["height"]:
-                    print(f"Jump #{index}: {jump}m\n")
+                    print(f"Jump #{index}: {jump:.2f}m\n")
                     index += 1
             else:
                 print("\nYou have nothing in your training log\n")
             
-            userExit = input("click e to exit: ")
-            if userExit == "e":
-                continue
+            while True:
+                userExit = input("click e to exit: ")
+                if userExit == "e":
+                    break
+                
             
             '''
             If the user presses 3 we first check if they have any jumps logged. if they do
@@ -162,45 +176,56 @@ def main():
             else:
                 print("\nYou do not have any jumps logged\n")
             
-            userExit = input("click e to exit: ")
-            if userExit == "e":
-                continue
-
+            while True:
+                userExit = input("click e to exit: ")
+                if userExit == "e":
+                    break
+            
+                
 
         elif userInput == "4":
             os.system("clear")
-            pb = 0
-            for jump in highJumpLog["height"]:
-                if jump > pb:
-                    pb = jump
-            try:    
-                userGoal = float(input("\nWhat is your high jump height goal?: "))
-                if userGoal <= 0.00:
-                    print("\nYou cant jump negative meters dude.")
-                    continue
-                elif userGoal <= pb:
-                    print("\nYou have already achieved that high of a jump\n")
-                    continue
-                elif pb / userGoal >= 0.95:
-                    calcGoal(pb, userGoal)
-                    print("This goal is within reach")
-                elif pb / userGoal >= 0.90:
-                    calcGoal(pb, userGoal)
-                    print("This goal is will be hard but you can do it!")
-                elif pb / userGoal >= 0.85:
-                    calcGoal(pb, userGoal)
-                    print("This goal is going to be challenging")
-                elif pb / userGoal >= 0.80:
-                    calcGoal(pb, userGoal)
-                    print("This goal is going to be pretty hard")
-                else:
-                    print("This goal is basically impossible")
-                            
-            except ValueError:
-                print("Please input a number.\n")
-            userExit = input("\nclick e to exit: ")
-            if userExit == "e":
-                continue
+            if highJumpLog["height"] != []:    
+                pb = 0
+                for jump in highJumpLog["height"]:
+                    if jump > pb:
+                        pb = jump
+                
+                try:    
+                    userGoal = float(input("\nWhat is your high jump height goal?: "))
+                    if userGoal <= 0.00:
+                        print("\nYou cant jump negative meters dude.")
+                        continue
+                    elif userGoal <= pb:
+                        print("\nYou have already achieved that high of a jump\n")
+                        continue
+                    elif pb / userGoal >= 0.95:
+                        calcGoal(pb, userGoal)
+                        print("This goal is within reach")
+                    elif pb / userGoal >= 0.90:
+                        calcGoal(pb, userGoal)
+                        print("This goal is will be hard but you can do it!")
+                    elif pb / userGoal >= 0.85:
+                        calcGoal(pb, userGoal)
+                        print("This goal is going to be challenging")
+                    elif pb / userGoal >= 0.80:
+                        calcGoal(pb, userGoal)
+                        print("This goal is going to be pretty hard")
+                    else:
+                        print("This goal is basically impossible")
+                                
+                except ValueError:
+                    print("Please input a number.\n")
+                userExit = input("\nclick e to exit: ")
+
+            else:
+                print("You have nothing in you high jump log\n")            
+            
+            while True:
+                userExit = input("click e to exit: ")
+                if userExit == "e":
+                    break
+            
         
         elif userInput == "5":
             print("\nThanks for using my app! Bye!\n")
