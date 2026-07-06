@@ -125,7 +125,7 @@ def main():
                     print("You have nothing in your high jump log")
                     
                     while True:
-                        userExit = input("click e to exit: ")
+                        userExit = input("\nclick e to exit: ")
                         if userExit == "e":
                             break
 
@@ -151,6 +151,7 @@ def main():
                     index += 1
             else:
                 print("\nYou have nothing in your training log\n")
+                time.sleep(3)
             
             while True:
                 userExit = input("click e to exit: ")
@@ -195,9 +196,11 @@ def main():
                     userGoal = float(input("\nWhat is your high jump height goal?: "))
                     if userGoal <= 0.00:
                         print("\nYou cant jump negative meters dude.")
+                        time.sleep(3)
                         continue
                     elif userGoal <= pb:
                         print("\nYou have already achieved that high of a jump\n")
+                        time.sleep(3)
                         continue
                     elif pb / userGoal >= 0.95:
                         calcGoal(pb, userGoal)
@@ -221,10 +224,12 @@ def main():
             else:
                 print("You have nothing in you high jump log\n")            
             
-            while True:
-                userExit = input("click e to exit: ")
-                if userExit == "e":
-                    break
+
+                while True:
+                    userExit = input("click e to exit: ")
+                    if userExit == "e":
+                        break
+                    
             
         
         elif userInput == "5":
@@ -258,7 +263,7 @@ def calcPB():
 def calcGoal(userPB, goal):
     userProgress = round(userPB/goal, 2) * 100
     print(f"\nCurrent PB: {userPB}m")
-    print(f"Goal: {goal}m")
+    print(f"Goal: {goal:.2f}m")
     print(f"Progress: {userProgress}%")
     
 
