@@ -11,14 +11,12 @@ highJumpLog = {
     
 }
 
-
 # 1. Finds the folder where main.py lives
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # 2. Glues the folder path and the filename together
 file_path = os.path.join(script_dir, "high-jump-log.json")
 
- 
 # 3. We use 'file_path' instead of just the filename.
 try:
     with open(file_path, "r") as file:
@@ -26,7 +24,6 @@ try:
 
 except FileNotFoundError:
     pass
-
 
 os.system("clear")
 askUserName = input("Welcome to Maxim's High jump App! Please enter your name: ")
@@ -36,7 +33,6 @@ else:
     print(f"Hello, {askUserName}! Thanks for using my High Jump App.")
 
 time.sleep(3)
-
 
 # main function controls the major functionings of the app
 def main():
@@ -240,9 +236,6 @@ def main():
         else:
             print("\nThats not an option\n")
                 
-
-
-
 def calcAvgHJ():
     index = 0
     averageHeight = 0
