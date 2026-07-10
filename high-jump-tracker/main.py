@@ -11,6 +11,12 @@ highJumpLog = {
     
 }
 
+clearScreen = ""
+if os.name == "nt":
+    clearScreen = "cls"
+else:
+    clearScreen = "clear"
+
 # 1. Finds the folder where main.py lives
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -26,7 +32,7 @@ except FileNotFoundError:
     pass
 
 # clears screen for visibility
-os.system("clear")
+os.system(clearScreen)
 
 
 while True:
@@ -34,7 +40,7 @@ while True:
     if not askUserName:
         print("Please input a valid username")
         time.sleep(2)
-        os.system("clear")
+        os.system(clearScreen)
         continue
     else:
         print(f"Hello, {askUserName}! Thanks for using my High Jump App.")
@@ -53,7 +59,7 @@ def main():
     
     
     while userInput != "5": 
-        os.system("clear")
+        os.system(clearScreen)
         # holds user input for navigating the app
         userInput = input("""Here is what you can do in the app:\n1. Add or delete a jump in your training log (in meters)
         \n2. View your training log
@@ -68,7 +74,7 @@ def main():
         log we will append the new log into the list that has all of the logs.
         '''
         if userInput == "1":
-            os.system("clear")
+            os.system(clearScreen)
             addOrDelete = input("\n1. Add a jump\n2. Delete a jump\nWhat would you like to do?: ")
             if addOrDelete == "1":
                 try:
@@ -119,7 +125,7 @@ def main():
 
             elif addOrDelete == "2":
                 if highJumpLog["height"] != []:
-                    os.system("clear")
+                    os.system(clearScreen)
                     try:
                         index = 1
                         print("Here is your training log:\n")
@@ -134,7 +140,7 @@ def main():
                                 if jump == highJumpLog["height"][deleteWhichJump - 1]:
                                     del highJumpLog["height"][deleteWhichJump - 1]
                                     del highJumpLog["date"][deleteWhichJump - 1]
-                            os.system("clear")
+                            os.system(clearScreen)
                             print(f"\nJump {deleteWhichJump} ({jump}m) has been deleted.\n")
                             time.sleep(2)
                         except ValueError:
@@ -146,7 +152,7 @@ def main():
                         time.sleep(2)
 
                 else:
-                    os.system("clear")
+                    os.system(clearScreen)
                     print("You have nothing in your high jump log")
                     time.sleep(2)
 
@@ -167,7 +173,7 @@ def main():
             '''
 
         elif userInput == "2":
-            os.system("clear")
+            os.system(clearScreen)
             if highJumpLog["height"] != []:
                 index = 1
                 print("Here is your training log:\n")
@@ -194,7 +200,7 @@ def main():
             '''
 
         elif userInput == "3":
-            os.system("clear")
+            os.system(clearScreen)
             if highJumpLog["height"] != []:
                 calcAvgHJ()
                 calcPB()
@@ -207,7 +213,7 @@ def main():
                 
 
         elif userInput == "4":
-            os.system("clear")
+            os.system(clearScreen)
             if highJumpLog["height"] != []:    
                 pb = 0
                 for jump in highJumpLog["height"]:
@@ -294,7 +300,6 @@ def exitToMainMenu():
         if userExit == "e":
             break
 
-# main()
 
 if __name__ == "__main__":
     main()
