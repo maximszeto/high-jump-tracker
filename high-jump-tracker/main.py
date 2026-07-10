@@ -150,13 +150,11 @@ def main():
                     print("You have nothing in your high jump log")
                     time.sleep(2)
 
-                    while True:
-                        userExit = input("\nclick e to exit: ")
-                        if userExit == "e":
-                            break
+                    exitToMainMenu()
 
             else:
                 print("Choose 1 or 2 dude")
+                time.sleep(2)
 
             # any time we add or delete a log we write to the high jump log file the changes we made
             with open(file_path, "w") as file:
@@ -183,10 +181,7 @@ def main():
                 time.sleep(2)
                 continue
             
-            while True:
-                userExit = input("click e to exit: ")
-                if userExit == "e":
-                    break
+            exitToMainMenu()
                 
             
             '''
@@ -207,10 +202,7 @@ def main():
             else:
                 print("\nYou do not have any jumps logged\n")
             
-            while True:
-                userExit = input("click e to exit: ")
-                if userExit == "e":
-                    break
+            exitToMainMenu()
             
                 
 
@@ -255,10 +247,7 @@ def main():
                 print("You have nothing in you high jump log\n")            
             
 
-                while True:
-                    userExit = input("click e to exit: ")
-                    if userExit == "e":
-                        break
+                exitToMainMenu()
                     
 
         elif userInput == "5":
@@ -268,6 +257,7 @@ def main():
 
         else:
             print("\nThats not an option\n")
+            time.sleep(2)
 
                
 def calcAvgHJ():
@@ -296,9 +286,15 @@ def calcGoal(userPB, goal):
     print(f"\nCurrent PB: {userPB}m")
     print(f"Goal: {goal:.2f}m")
     print(f"Progress: {userProgress}%")
-    
 
-main()
+
+def exitToMainMenu():
+    while True:
+        userExit = input("click e to exit: ")
+        if userExit == "e":
+            break
+
+# main()
 
 if __name__ == "__main__":
     main()
