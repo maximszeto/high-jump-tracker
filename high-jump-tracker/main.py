@@ -134,12 +134,10 @@ def main():
                             index += 1 
                         try:
                             deleteWhichJump = int(input("Which Jump would you like to delete?: "))
-                            # we will check if each jump is equal to the interger number of what jump the user
-                            # wants to delete. If it is we will delete the height of the jump and the date of the jump
-                            for jump in highJumpLog["height"]:
-                                if jump == highJumpLog["height"][deleteWhichJump - 1]:
-                                    del highJumpLog["height"][deleteWhichJump - 1]
-                                    del highJumpLog["date"][deleteWhichJump - 1]
+                            # instead of looping through the list since we already have the index needed for deletion
+                            # we just delete it right then and there
+                            del highJumpLog["height"][deleteWhichJump - 1]
+                            del highJumpLog["date"][deleteWhichJump - 1]
                             os.system(clearScreen)
                             print(f"\nJump {deleteWhichJump} ({jump}m) has been deleted.\n")
                             time.sleep(2)
