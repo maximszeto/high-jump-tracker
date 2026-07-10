@@ -25,6 +25,7 @@ try:
 except FileNotFoundError:
     pass
 
+# clears screen for visibility
 os.system("clear")
 askUserName = input("Welcome to Maxim's High jump App! Please enter your name: ")
 if askUserName.lower() == "maxim":
@@ -40,9 +41,10 @@ def main():
     index = 0
     userInput = 0
     
-    # this input will keep showing up until the user desides to leave the app
-    while userInput != "5":
+    
+    while userInput != "5": 
         os.system("clear")
+        # holds user input for navigating the app
         userInput = input("""Here is what you can do in the app:\n1. Add or delete a jump in your training log (in meters)
         \n2. View your training log
         \n3. View your average jump height and your personal best and when it was achieved
@@ -60,12 +62,16 @@ def main():
             addOrDelete = input("\n1. Add a jump\n2. Delete a jump\nWhat would you like to do?: ")
             if addOrDelete == "1":
                 try:
+                    # turns input to float to be able to add to list as a float right away
                     newlog = float(input("\nIn meters what height did you achieve? "))
                     newlog = round(newlog, 2)
 
                     if newlog <= 0.00:
                         print("\nYou cant jump negative meters.")
+                        time.sleep(2)
+                        continue
 
+                    # append each log into the height category of the high jump log
                     elif newlog <= 1.00:
                         highJumpLog["height"].append(newlog)
                         print("\nAdded to log")
@@ -83,12 +89,16 @@ def main():
                         print("\nAdded to log")
                         print(f"Wowza. {newlog:.2f} meters is amazing\n")
                     
+                    # at the very end of the adding section we will add a date no matter what the jump was
                     highJumpLog["date"].append(time.strftime("%Y-%m-%d - %I:%M %p", time.localtime()))
 
                 except ValueError:
                     print("Please input a number.\n")
+                    time.sleep(2)
+                    continue
                 
                 time.sleep(2)
+                
                 '''
                 When we first ask them to delete a jump we first have to show them
                 there training log. Then we ask them which jump they want to delete
@@ -98,17 +108,17 @@ def main():
                 '''
 
             elif addOrDelete == "2":
-                
-                
                 if highJumpLog["height"] != []:
                     os.system("clear")
                     try:
                         index = 1
                         print("Here is your training log:\n")
-                        for jump in highJumpLog["height"]:
-                            print(f"Jump #{index}: {jump}m\n")
-                            index += 1   
+                        for jump, date in zip(highJumpLog["height"], highJumpLog["date"]):
+                            print(f"Jump #{index}: {jump:.2f}m. logged on {date}\n")
+                            index += 1 
                         deleteWhichJump = int(input("Which Jump would you like to delete?: "))
+                        # we will check if each jump is equal to the interger number of what jump the user
+                        # wants to delete. If it is we will delete the height of the jump and the date of the jump
                         for jump in highJumpLog["height"]:
                             if jump == highJumpLog["height"][deleteWhichJump - 1]:
                                 del highJumpLog["height"][deleteWhichJump - 1]
@@ -131,6 +141,7 @@ def main():
             else:
                 print("Choose 1 or 2 dude")
 
+            # any time we add or delete a log we write to the high jump log file the changes we made
             with open(file_path, "w") as file:
                 json.dump(highJumpLog, file)
 
@@ -145,12 +156,15 @@ def main():
             if highJumpLog["height"] != []:
                 index = 1
                 print("Here is your training log:\n")
+                # when we zip the height and date lists together it will make it so each index will correspond
+                # to the other index of the other list. We then will print them out pretty
                 for jump, date in zip(highJumpLog["height"], highJumpLog["date"]):
                     print(f"Jump #{index}: {jump:.2f}m. logged on {date}\n")
                     index += 1
             else:
                 print("\nThere is nothing in your training log\n")
-                time.sleep(3)
+                time.sleep(2)
+                continue
             
             while True:
                 userExit = input("click e to exit: ")
@@ -252,6 +266,8 @@ def calcAvgHJ():
 def calcPB():
     pb = 0
     pbDate = ""
+    # since we zip the height and date lists together when we find the pb we use the same index 
+    # and assign it to be the date of the pb
     for jump, date in zip(highJumpLog["height"], highJumpLog["date"]):
         if jump > pb:
             pb = jump
