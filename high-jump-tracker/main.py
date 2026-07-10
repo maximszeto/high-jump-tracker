@@ -27,13 +27,23 @@ except FileNotFoundError:
 
 # clears screen for visibility
 os.system("clear")
-askUserName = input("Welcome to Maxim's High jump App! Please enter your name: ")
-if askUserName.lower() == "maxim":
-    print("Developer mode activated! Welcome, Maxim!")
-else:
-    print(f"Hello, {askUserName}! Thanks for using my High Jump App.")
 
-time.sleep(3)
+
+while True:
+    askUserName = input("Welcome to Maxim's High jump App! Please enter your name: ").strip()
+    if not askUserName:
+        print("Please input a valid username")
+        time.sleep(2)
+        os.system("clear")
+        continue
+    else:
+        print(f"Hello, {askUserName}! Thanks for using my High Jump App.")
+        break
+
+
+
+
+time.sleep(2)
 
 # main function controls the major functionings of the app
 def main():
@@ -116,23 +126,30 @@ def main():
                         for jump, date in zip(highJumpLog["height"], highJumpLog["date"]):
                             print(f"Jump #{index}: {jump:.2f}m. logged on {date}\n")
                             index += 1 
-                        deleteWhichJump = int(input("Which Jump would you like to delete?: "))
-                        # we will check if each jump is equal to the interger number of what jump the user
-                        # wants to delete. If it is we will delete the height of the jump and the date of the jump
-                        for jump in highJumpLog["height"]:
-                            if jump == highJumpLog["height"][deleteWhichJump - 1]:
-                                del highJumpLog["height"][deleteWhichJump - 1]
-                                del highJumpLog["date"][deleteWhichJump - 1]
-                        os.system("clear")
-                        print(f"\nJump {deleteWhichJump} ({jump}m) has been deleted.\n")
-                        time.sleep(2)
-                    except IndexError or ValueError:
+                        try:
+                            deleteWhichJump = int(input("Which Jump would you like to delete?: "))
+                            # we will check if each jump is equal to the interger number of what jump the user
+                            # wants to delete. If it is we will delete the height of the jump and the date of the jump
+                            for jump in highJumpLog["height"]:
+                                if jump == highJumpLog["height"][deleteWhichJump - 1]:
+                                    del highJumpLog["height"][deleteWhichJump - 1]
+                                    del highJumpLog["date"][deleteWhichJump - 1]
+                            os.system("clear")
+                            print(f"\nJump {deleteWhichJump} ({jump}m) has been deleted.\n")
+                            time.sleep(2)
+                        except ValueError:
+                            print("\nNumbers only")
+                            time.sleep(2)
+                    
+                    except IndexError:
                         print(f"\nThere is no jump #{deleteWhichJump}")
+                        time.sleep(2)
 
                 else:
                     os.system("clear")
                     print("You have nothing in your high jump log")
-                    
+                    time.sleep(2)
+
                     while True:
                         userExit = input("\nclick e to exit: ")
                         if userExit == "e":
