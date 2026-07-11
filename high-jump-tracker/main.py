@@ -133,14 +133,21 @@ def main():
                             print(f"Jump #{index}: {jump:.2f}m. logged on {date}\n")
                             index += 1 
                         try:
-                            deleteWhichJump = int(input("Which Jump would you like to delete?: "))
+                            deleteWhichJump = input("To delete a jump input the number or if you want to delete all jump type ALL: ")
                             # instead of looping through the list since we already have the index needed for deletion
                             # we just delete it right then and there
-                            del highJumpLog["height"][deleteWhichJump - 1]
-                            del highJumpLog["date"][deleteWhichJump - 1]
-                            os.system(clearScreen)
-                            print(f"\nJump {deleteWhichJump} ({jump:.2f}m) has been deleted.\n")
-                            time.sleep(2)
+                            if deleteWhichJump == "ALL":
+                                highJumpLog["height"] = []
+                                highJumpLog["date"] = []
+                                print("High jump log cleared")
+                                time.sleep(2)
+                                    
+                            else:
+                                del highJumpLog["height"][deleteWhichJump - 1]
+                                del highJumpLog["date"][deleteWhichJump - 1]
+                                os.system(clearScreen)
+                                print(f"\nJump {deleteWhichJump} ({jump:.2f}m) has been deleted.\n")
+                                time.sleep(2)
                         except ValueError:
                             print("\nNumbers only")
                             time.sleep(2)
