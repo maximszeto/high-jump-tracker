@@ -143,6 +143,7 @@ def main():
                                 time.sleep(2)
                                     
                             else:
+                                deleteWhichJump = int(deleteWhichJump)
                                 del highJumpLog["height"][deleteWhichJump - 1]
                                 del highJumpLog["date"][deleteWhichJump - 1]
                                 os.system(clearScreen)
