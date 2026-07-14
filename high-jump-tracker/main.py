@@ -16,6 +16,7 @@ highJumpLog = {
 # 1. Finds the folder where main.py lives
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
+# 2. Checks if a filename is provided as a command-line argument
 if (len(sys.argv) > 1):
     if (arguments[0] is not None):
         # 1. if a filename is provided as a command-line argument, we use that instead of the default filename
@@ -33,7 +34,6 @@ try:
 
 except FileNotFoundError:
     pass
-
 
 os.system("clear")
 askUserName = input("Welcome to Maxim's High jump App! Please enter your name: ")
