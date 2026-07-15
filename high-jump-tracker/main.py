@@ -2,6 +2,7 @@
 import os
 import json
 import time
+import calculations
 
 # holds all of the high jump logs
 highJumpLog = {
@@ -82,35 +83,8 @@ def main():
                     newlog = float(input("\nIn meters what height did you achieve? "))
                     newlog = round(newlog, 2)
 
-                    addNewLog(newlog)
+                    calculations.addNewLog(newlog, highJumpLog)
                     
-                    '''
-                    if newlog <= 0.00:
-                        print("\nYou cant jump negative meters.")
-                        time.sleep(2)
-                        continue
-
-                    # append each log into the height category of the high jump log
-                    elif newlog <= 1.00:
-                        highJumpLog["height"].append(newlog)
-                        print("\nAdded to log")
-                        print(f"Good start. {newlog:.2f} meters is good but you can do better\n")
-                    elif newlog <= 1.50:
-                        highJumpLog["height"].append(newlog)
-                        print("\nAdded to log")
-                        print(f"that is pretty solid. {newlog:.2f} meters is solid\n")
-                    elif newlog <= 2.00:
-                        highJumpLog["height"].append(newlog)
-                        print("\nAdded to log")
-                        print(f"dang you jumping. {newlog:.2f} meters is good\n")
-                    elif newlog >= 2.00:
-                        highJumpLog["height"].append(newlog)
-                        print("\nAdded to log")
-                        print(f"Wowza. {newlog:.2f} meters is amazing\n")
-                    
-                    # at the very end of the adding section we will add a date no matter what the jump was
-                    highJumpLog["date"].append(time.strftime("%Y-%m-%d - %I:%M %p", time.localtime()))
-                    '''
 
                 except ValueError:
                     print("Please input a number.\n")
@@ -315,33 +289,7 @@ def exitToMainMenu():
         if userExit == "e":
             break
 
-def addNewLog(log):
 
-        if log <= 0.00:
-            print("\nYou cant jump negative meters.")
-            time.sleep(2)
-            #continue
-
-            # append each log into the height category of the high jump log
-        elif log <= 1.00:
-            highJumpLog["height"].append(log)
-            print("\nAdded to log")
-            print(f"Good start. {log:.2f} meters is good but you can do better\n")
-        elif log <= 1.50:
-            highJumpLog["height"].append(log)
-            print("\nAdded to log")
-            print(f"that is pretty solid. {log:.2f} meters is solid\n")
-        elif log <= 2.00:
-            highJumpLog["height"].append(log)
-            print("\nAdded to log")
-            print(f"dang you jumping. {log:.2f} meters is good\n")
-        elif log >= 2.00:
-            highJumpLog["height"].append(log)
-            print("\nAdded to log")
-            print(f"Wowza. {log:.2f} meters is amazing\n")
-                        
-        # at the very end of the adding section we will add a date no matter what the jump was
-        highJumpLog["date"].append(time.strftime("%Y-%m-%d - %I:%M %p", time.localtime()))
 
     
 
