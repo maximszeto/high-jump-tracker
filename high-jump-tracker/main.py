@@ -188,8 +188,8 @@ def main():
         elif userInput == "3":
             os.system(clearScreen)
             if highJumpLog["height"] != []:
-                calcAvgHJ()
-                calcPB()
+                calcAvgHJ(highJumpLog)
+                calcPB(highJumpLog)
 
             else:
                 print("\nYou do not have any jumps logged\n")
@@ -255,22 +255,22 @@ def main():
             time.sleep(2)
 
                
-def calcAvgHJ():
+def calcAvgHJ(log):
     index = 0
     averageHeight = 0
-    for jump in highJumpLog["height"]: 
+    for jump in log["height"]: 
         averageHeight += jump
         index += 1
     averageHeight = averageHeight/index
     print("Your average jump height is... " + str(round(averageHeight, 2)) + " meters!\n")
 
 
-def calcPB():
+def calcPB(log):
     pb = 0
     pbDate = ""
     # since we zip the height and date lists together when we find the pb we use the same index 
     # and assign it to be the date of the pb
-    for jump, date in zip(highJumpLog["height"], highJumpLog["date"]):
+    for jump, date in zip(log["height"], log["date"]):
         if jump > pb:
             pb = jump
             pbDate = date
