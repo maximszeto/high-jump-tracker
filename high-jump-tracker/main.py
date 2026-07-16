@@ -189,7 +189,7 @@ def main():
             os.system(clearScreen)
             if highJumpLog["height"] != []:
                 calcAvgHJ(highJumpLog)
-                calcPB(highJumpLog)
+                calculations.calcPB(highJumpLog)
 
             else:
                 print("\nYou do not have any jumps logged\n")
@@ -254,7 +254,7 @@ def main():
             print("\nThats not an option\n")
             time.sleep(2)
 
-               
+
 def calcAvgHJ(log):
     index = 0
     averageHeight = 0
@@ -264,7 +264,7 @@ def calcAvgHJ(log):
     averageHeight = averageHeight/index
     print("Your average jump height is... " + str(round(averageHeight, 2)) + " meters!\n")
 
-
+'''
 def calcPB(log):
     pb = 0
     pbDate = ""
@@ -275,6 +275,7 @@ def calcPB(log):
             pb = jump
             pbDate = date
     print(f"Your Personal Best jump is {pb:.2f}m and it was logged on {pbDate}\n")
+    '''
 
 def calcGoal(userPB, goal):
     userProgress = round(userPB/goal, 2) * 100

@@ -28,3 +28,15 @@ def addNewLog(jump, log):
                         
         # at the very end of the adding section we will add a date no matter what the jump was
         log["date"].append(time.strftime("%Y-%m-%d - %I:%M %p", time.localtime()))
+
+
+def calcPB(log):
+    pb = 0
+    pbDate = ""
+    # since we zip the height and date lists together when we find the pb we use the same index 
+    # and assign it to be the date of the pb
+    for jump, date in zip(log["height"], log["date"]):
+        if jump > pb:
+            pb = jump
+            pbDate = date
+    print(f"Your Personal Best jump is {pb:.2f}m and it was logged on {pbDate}\n")
