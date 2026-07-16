@@ -62,3 +62,10 @@ def exitToMainMenu():
         userExit = input("click e to exit: ")
         if userExit == "e":
             break
+
+def showHJLog(log):
+    index = 1
+    print("Here is your training log:\n")
+    for jump, date in zip(log["height"], log["date"]):
+        print(f"Jump #{index}: {jump:.2f}m. logged on {date}\n")
+        index += 1 

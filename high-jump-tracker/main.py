@@ -85,7 +85,6 @@ def main():
 
                     calculations.addNewLog(newlog, highJumpLog)
                     
-
                 except ValueError:
                     print("Please input a number.\n")
                     time.sleep(2)
@@ -105,11 +104,7 @@ def main():
                 if highJumpLog["height"] != []:
                     os.system(clearScreen)
                     try:
-                        index = 1
-                        print("Here is your training log:\n")
-                        for jump, date in zip(highJumpLog["height"], highJumpLog["date"]):
-                            print(f"Jump #{index}: {jump:.2f}m. logged on {date}\n")
-                            index += 1 
+                        calculations.showHJLog(highJumpLog)
                         try:
                             deleteWhichJump = input("To delete a jump input the number or if you want to delete all jump type ALL: ")
                             # instead of looping through the list since we already have the index needed for deletion
@@ -161,13 +156,7 @@ def main():
         elif userInput == "2":
             os.system(clearScreen)
             if highJumpLog["height"] != []:
-                index = 1
-                print("Here is your training log:\n")
-                # when we zip the height and date lists together it will make it so each index will correspond
-                # to the other index of the other list. We then will print them out pretty
-                for jump, date in zip(highJumpLog["height"], highJumpLog["date"]):
-                    print(f"Jump #{index}: {jump:.2f}m. logged on {date}\n")
-                    index += 1
+                calculations.showHJLog(highJumpLog)
             else:
                 print("\nThere is nothing in your training log\n")
                 time.sleep(2)
