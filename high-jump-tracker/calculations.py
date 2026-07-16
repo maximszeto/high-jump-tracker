@@ -56,3 +56,9 @@ def calcGoal(userPB, goal):
     print(f"\nCurrent PB: {userPB:.2f}m")
     print(f"Goal: {goal:.2f}m")
     print(f"Progress: {userProgress}%")
+
+def exitToMainMenu():
+    while True:
+        userExit = input("click e to exit: ")
+        if userExit == "e":
+            break

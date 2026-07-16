@@ -142,7 +142,7 @@ def main():
                     print("You have nothing in your high jump log")
                     time.sleep(2)
 
-                    exitToMainMenu()
+                    calculations.exitToMainMenu()
 
             else:
                 print("Choose 1 or 2 dude")
@@ -173,7 +173,7 @@ def main():
                 time.sleep(2)
                 continue
             
-            exitToMainMenu()
+            calculations.exitToMainMenu()
                 
             
             '''
@@ -194,7 +194,7 @@ def main():
             else:
                 print("\nYou do not have any jumps logged\n")
             
-            exitToMainMenu()
+            calculations.exitToMainMenu()
             
                 
 
@@ -239,7 +239,7 @@ def main():
                 print("You have nothing in you high jump log\n")            
             
 
-                exitToMainMenu()
+                calculations.exitToMainMenu()
                     
 
         elif userInput == "5":
@@ -254,19 +254,6 @@ def main():
             print("\nThats not an option\n")
             time.sleep(2)
 
-
-
-
-
-def exitToMainMenu():
-    while True:
-        userExit = input("click e to exit: ")
-        if userExit == "e":
-            break
-
-
-
-    
 
 if __name__ == "__main__":
     main()
