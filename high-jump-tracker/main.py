@@ -217,16 +217,16 @@ def main():
                         time.sleep(3)
                         continue
                     elif pb / userGoal >= 0.95:
-                        calcGoal(pb, userGoal)
+                        calculations.calcGoal(pb, userGoal)
                         print("This goal is within reach")
                     elif pb / userGoal >= 0.90:
-                        calcGoal(pb, userGoal)
+                        calculations.calcGoal(pb, userGoal)
                         print("This goal is will be hard but you can do it!")
                     elif pb / userGoal >= 0.85:
-                        calcGoal(pb, userGoal)
+                        calculations.calcGoal(pb, userGoal)
                         print("This goal is going to be challenging")
                     elif pb / userGoal >= 0.80:
-                        calcGoal(pb, userGoal)
+                        calculations.calcGoal(pb, userGoal)
                         print("This goal is going to be pretty hard")
                     else:
                         print("This goal is basically impossible")
@@ -255,11 +255,7 @@ def main():
             time.sleep(2)
 
 
-def calcGoal(userPB, goal):
-    userProgress = round(userPB/goal, 2) * 100
-    print(f"\nCurrent PB: {userPB:.2f}m")
-    print(f"Goal: {goal:.2f}m")
-    print(f"Progress: {userProgress}%")
+
 
 
 def exitToMainMenu():
