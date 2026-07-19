@@ -1,16 +1,9 @@
 # High jump tracker v1.0 by Maxim Szeto
 import os
-import json
 import time
 import calculations
-
-# holds all of the high jump logs
-highJumpLog = {
-    
-    "height": [],
-    "date": []
-    
-}
+import database
+from database import highJumpLog
 
 clearScreen = ""
 if os.name == "nt":
@@ -18,19 +11,12 @@ if os.name == "nt":
 else:
     clearScreen = "clear"
 
-# 1. Finds the folder where main.py lives
-script_dir = os.path.dirname(os.path.abspath(__file__))
 
-# 2. Glues the folder path and the filename together
-file_path = os.path.join(script_dir, "high-jump-log.json")
 
-# 3. We use 'file_path' instead of just the filename.
-try:
-    with open(file_path, "r") as file:
-        highJumpLog = json.load(file)
-
-except FileNotFoundError:
-    pass
+# load previously saved data when we first run the app if there is any
+loadedData = database.loadData()
+highJumpLog.clear()
+highJumpLog.update(loadedData)
 
 # clears screen for visibility
 os.system(clearScreen)
@@ -136,8 +122,7 @@ def main():
                 time.sleep(2)
 
             # any time we add or delete a log we write to the high jump log file the changes we made
-            with open(file_path, "w") as file:
-                json.dump(highJumpLog, file)
+            database.saveData()
 
             '''
             if the user inputs two we will print their training log by using an f string
