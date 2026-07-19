@@ -110,11 +110,8 @@ def main():
                             # instead of looping through the list since we already have the index needed for deletion
                             # we just delete it right then and there
                             if deleteWhichJump == "ALL":
-                                highJumpLog["height"] = []
-                                highJumpLog["date"] = []
-                                os.system(clearScreen)
-                                print("High jump log cleared")
-                                time.sleep(2)
+                                calculations.deleteAllLogs(highJumpLog)
+                                os.system(clearScreen) 
                                     
                             else:
                                 deleteWhichJump = int(deleteWhichJump)

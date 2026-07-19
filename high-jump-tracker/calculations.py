@@ -1,6 +1,7 @@
 # calculation functions that happen in the main file
 import time
 
+
 def addNewLog(jump, log):
 
         if jump <= 0.00:
@@ -69,3 +70,9 @@ def showHJLog(log):
     for jump, date in zip(log["height"], log["date"]):
         print(f"Jump #{index}: {jump:.2f}m. logged on {date}\n")
         index += 1 
+
+def deleteAllLogs(log):
+    log["height"] = []
+    log["date"] = []
+    print("High jump log cleared")
+    time.sleep(2)
