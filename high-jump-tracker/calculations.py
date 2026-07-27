@@ -108,3 +108,9 @@ def goalCalculation(goal, pb):
         print("This goal is going to be pretty hard")
     else:
         print("This goal is basically impossible")
+
+
+def convertFtToM(feet, inches):
+    result = (feet * 0.3048) + (inches * 0.0254)
+    return result
+    

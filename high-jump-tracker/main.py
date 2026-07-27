@@ -45,14 +45,15 @@ def main():
     userInput = ""
     
     
-    while userInput != "5": 
+    while userInput != "6": 
         os.system(clearScreen)
         # holds user input for navigating the app
         userInput = input("""Here is what you can do in the app:\n1. Add or delete a jump in your training log (in meters)
         \n2. View your training log
         \n3. View your average jump height and your personal best and when it was achieved
         \n4. Add new goal and see progress
-        \n5. Leave
+        \n5. Convert feet and inches to meters
+        \n6. Leave
         \nPlease input the number corresponding with what action you want to do: """)
 
         '''
@@ -188,6 +189,18 @@ def main():
                     
 
         elif userInput == "5":
+            os.system(clearScreen)
+            try:
+                inputFeet = int(input("Feet: "))
+                inputInches = int(input("Inches: "))
+                meters = round(calculations.convertFtToM(inputFeet, inputInches), 2)
+                print(f"{inputFeet} feet {inputInches} inches is equal to {meters} meters\n")
+                calculations.exitToMainMenu()
+
+            except ValueError:
+                print("please input a number.")
+
+        elif userInput == "6":
             os.system(clearScreen)
             print("\nThanks for using my app! Bye!\n")
             time.sleep(2)
