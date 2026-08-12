@@ -7,8 +7,8 @@ app = Flask(__name__)
 def home():
     if request.method == "POST":
         
-        jump_feet = int(request.form.get("feet"))
-        jump_inches = int(request.form.get("inches"))
+        jump_feet = float(request.form.get("feet"))
+        jump_inches = float(request.form.get("inches"))
         meters = calculations.convertFtToM(jump_feet, jump_inches)
         print(meters)
 
