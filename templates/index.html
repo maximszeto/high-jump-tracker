@@ -10,13 +10,20 @@
     <body>
         <form action="/" method="post">
             <label>
-                Jump Height: 
-                <input type="text" name="jump-height"/>
+                Feet: 
+                <input type="text" name="feet"/>
+            </label>
+            <label>
+                Inches: 
+                <input type="text" name="inches"/>
             </label>
             <button type="submit">Submit</button>
         </form>
 
-        <p>programming is hard</p>
+        {% if meters is not none %}
+            <p>Your inputted measurements are equal to {{ meters }} meters</p>
+
+        {% endif %}
         
     </body>
 </html>

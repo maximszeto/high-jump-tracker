@@ -1,14 +1,21 @@
 from flask import Flask, render_template, request
+from logic import calculations
 
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def home():
-
-    jumpHeight = request.form.get("jump-height")
-    print(jumpHeight)
+    if request.method == "POST":
         
+        jump_feet = int(request.form.get("feet"))
+        jump_inches = int(request.form.get("inches"))
+        meters = calculations.convertFtToM(jump_feet, jump_inches)
+        print(meters)
+
+        return render_template("index.html", meters=meters)
+    
     return render_template("index.html")
+    
 
     
 
