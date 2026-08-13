@@ -20,6 +20,11 @@
             <button type="submit">Submit</button>
         </form>
 
+        <a href="{{url_for('stats')}}">
+
+            <button type="button">click me son</button>
+        </a>
+        
         {% if meters is not none %}
             <p>Your inputted measurements are equal to {{ meters }} meters</p>
 

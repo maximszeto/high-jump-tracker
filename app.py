@@ -16,8 +16,9 @@ def home():
     
     return render_template("index.html")
     
-
-    
+@app.route("/stats", methods=["GET", "POST"])
+def stats():    
+    return render_template("stats.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
