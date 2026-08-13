@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
 
+        <link rel="stylesheet" href="{{ url_for('static', filename='page-style.css') }}">
     </head>
     <body>
 
@@ -15,10 +16,19 @@
             
         </form>
 
-        <table>
+        <table class="jump-table">
             <thead>
-                
+                <tr>
+                    <th>Jump Height</th>
+                    <th>Date</th>
+                </tr>
             </thead>
+            <tbody>
+                <tr>
+                    <td>1.72m</td>
+                    <td>August 12th</td>
+                </tr>
+            </tbody>
         </table>
     </body>
 </html>

@@ -1,0 +1,15 @@
+#title {
+    font-family: JetBrains Mono;
+}
+
+.jump-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.jump-table th,
+.jump-table td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+}
