@@ -7,10 +7,13 @@ app = Flask(__name__)
 def home():
     if request.method == "POST":
         try:
-            jump_feet = float(request.form.get("feet"))
-            jump_inches = float(request.form.get("inches"))
-            meters = calculations.convertFtToM(jump_feet, jump_inches)
-            print(meters)
+            raw_feet = request.form.get("feet")
+            raw_inches = request.form.get("inches")
+            if type(raw_feet) == int or float and type(raw_inches) == int or float:
+                feet = float(raw_feet)
+                inches = float(raw_inches)
+                meters = calculations.convertFtToM(feet, inches)
+                print(meters)
 
             return render_template("index.html", meters=meters)
 
