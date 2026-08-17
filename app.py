@@ -25,9 +25,16 @@ def home():
 @app.route("/stats", methods=["GET", "POST"])
 def stats():    
     if request.method == "POST":
-        newJump = float(request.form.get("jump-height"))
-        calculations.addNewLog(newJump, database.highJumpLog) 
+        try:
+            raw_jump = request.form.get("jump-height")
+            if type(raw_jump) == int or float:
+                newJump = float(raw_jump)
+                calculations.addNewLog(newJump, database.highJumpLog) 
 
+        except ValueError:
+            
+            return render_template("stats.html")
+    
     return render_template("stats.html")
 
 if __name__ == "__main__":
