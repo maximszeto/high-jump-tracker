@@ -25,3 +25,7 @@ def loadData():
 def saveData():
     with open(file_path, "w") as file:
         json.dump(highJumpLog, file)
+
+_loaded = loadData()
+if _loaded:
+    highJumpLog.update(_loaded)
