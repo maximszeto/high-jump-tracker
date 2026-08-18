@@ -29,13 +29,13 @@ def stats():
         try:
             new_jump = float(raw_jump)
         except (ValueError, TypeError):
-            flash("Enter a valid numeric jump height.")
+            #flash("Enter a valid numeric jump height.")
             return redirect(url_for("stats"))
             
         ok = calculations.addNewLog(new_jump, database.highJumpLog)
         if ok:
             database.saveData()
-           #flash("Jump logged.")
+            #flash("Jump logged.")
         else:
             pass #flash("Jump must be positive.")
         return redirect(url_for("stats"))
