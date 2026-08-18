@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from logic import calculations, database
 
 app = Flask(__name__)
@@ -25,17 +25,22 @@ def home():
 @app.route("/stats", methods=["GET", "POST"])
 def stats():    
     if request.method == "POST":
+        raw_jump = request.form.get("jump-height", "").strip()
         try:
-            raw_jump = request.form.get("jump-height")
-            if type(raw_jump) == int or float:
-                newJump = float(raw_jump)
-                calculations.addNewLog(newJump, database.highJumpLog) 
-
-        except ValueError:
+            new_jump = float(raw_jump)
+        except (ValueError, TypeError):
+            flash("Enter a valid numeric jump height.")
+            return redirect(url_for("stats"))
             
-            return render_template("stats.html")
-    
-    return render_template("stats.html")
+        ok = calculations.addNewLog(new_jump, database.highJumpLog)
+        if ok:
+            database.saveData()
+           #flash("Jump logged.")
+        else:
+            pass #flash("Jump must be positive.")
+        return redirect(url_for("stats"))
+         
+    return render_template("stats.html", log=database.highJumpLog)
 
 if __name__ == "__main__":
     app.run(debug=True)
