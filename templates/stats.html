@@ -15,6 +15,16 @@
             <button type="submit">Submit</button>
             
         </form>
+        
+        <h2>High Jump Log</h2>
+
+        <pre>height={{ log["height"] }} date={{ log["date"] }}</pre>
+
+
+        {% if log["height"]|length == 0 %}
+            <p>No jumps have been logged yet</p>
+        
+        {% else %}
 
         <table class="jump-table">
             <thead>
@@ -24,11 +34,18 @@
                 </tr>
             </thead>
             <tbody>
+                {% for i in range(log["height"]|length) %}
                 <tr>
-                    <td>1.72m</td>
-                    <td>August 12th</td>
+                    <td>
+                        {{ log["height"][i] }}
+                    </td>
+                    <td>
+                        {{ log["date"][i] }}
+                    </td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
+        {% endif %}
     </body>
 </html>
