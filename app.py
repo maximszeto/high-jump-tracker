@@ -20,7 +20,7 @@ def home():
         except ValueError:
             return render_template("index.html")
             
-    return render_template("index.html")
+    return render_template("index.html", meters=None)
     
 @app.route("/stats", methods=["GET", "POST"])
 def stats():    

@@ -27,8 +27,14 @@
             <button type="button">click me son</button>
         </a>
         
-        {% if meters is not none %}
-            <p>Your inputted measurements are equal to {{ meters }} meters</p>
+        {% if meters == None %}
+
+        <p>Please input measurements</p>
+
+        {% else %}
+
+
+        <p>Your inputted measurements are equal to {{ meters }} meters</p>
 
         {% endif %}
         
