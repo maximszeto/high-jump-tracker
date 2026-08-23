@@ -7,6 +7,11 @@
     </head>
     <body>
 
+        <nav class="nav-buttons">
+            <a class="btn" href="{{url_for('stats')}}">log</a>
+            <a class="btn" href="{{url_for('home')}}">conversion</a>                
+        </nav>
+
         <form action="/stats" method="post">
             <label>
                 How high did you jump in meters?:  

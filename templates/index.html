@@ -9,8 +9,15 @@
     </head>
 
     <body>
+
+        <nav class="nav-buttons">
+                    <a class="btn" href="{{url_for('stats')}}">log</a>
+                    <a class="btn" href="{{url_for('home')}}">conversion</a>
+                    
+        </nav>
+        
         <form action="/" method="post">
-            <p>Create a new High jump Entry:</p>
+            <p>Feet to meters conversion</p>
             <label>
                 Feet: 
                 <input type="text" name="feet"/>
@@ -22,10 +29,6 @@
             <button type="submit">Submit</button>
         </form>
 
-        <a href="{{url_for('stats')}}">
-
-            <button type="button">click me son</button>
-        </a>
         
         {% if meters == None %}
 
