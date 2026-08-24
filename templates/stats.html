@@ -6,48 +6,49 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='page-style.css') }}">
     </head>
     <body>
+        <div id="container">
+            <nav class="nav-buttons">
+                <a class="btn" href="{{url_for('stats')}}">log</a>
+                <a class="btn" href="{{url_for('home')}}">conversion</a>                
+            </nav>
 
-        <nav class="nav-buttons">
-            <a class="btn" href="{{url_for('stats')}}">log</a>
-            <a class="btn" href="{{url_for('home')}}">conversion</a>                
-        </nav>
-
-        <form action="/stats" method="post">
-            <label>
-                How high did you jump in meters?:  
-                <input type="text" name="jump-height"/>
-            </label>
-            <button type="submit">Submit</button>
+            <form action="/stats" method="post">
+                <label>
+                    How high did you jump in meters?:  
+                    <input type="text" name="jump-height"/>
+                </label>
+                <button type="submit">Submit</button>
+                
+            </form>
             
-        </form>
-        
-        <h2>High Jump Log</h2>
+            <h2>High Jump Log</h2>
 
-        {% if log["height"]|length == 0 %}
-            <p>No jumps have been logged yet</p>
-        
-        {% else %}
+            {% if log["height"]|length == 0 %}
+                <p>No jumps have been logged yet</p>
+            
+            {% else %}
 
-        <table class="jump-table">
-            <thead>
-                <tr>
-                    <th>Jump Height</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for i in range(log["height"]|length) %}
-                <tr>
-                    <td>
-                        {{ log["height"][i] }}m
-                    </td>
-                    <td>
-                        {{ log["date"][i] }}
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% endif %}
+            <table class="jump-table">
+                <thead>
+                    <tr>
+                        <th>Jump Height</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in range(log["height"]|length) %}
+                    <tr>
+                        <td>
+                            {{ log["height"][i] }}m
+                        </td>
+                        <td>
+                            {{ log["date"][i] }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
     </body>
 </html>

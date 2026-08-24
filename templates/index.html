@@ -9,37 +9,40 @@
     </head>
 
     <body>
+        <div>
 
-        <nav class="nav-buttons">
-                    <a class="btn" href="{{url_for('stats')}}">log</a>
-                    <a class="btn" href="{{url_for('home')}}">conversion</a>
-                    
-        </nav>
+            <nav class="nav-buttons">
+                        <a class="btn" href="{{url_for('stats')}}">log</a>
+                        <a class="btn" href="{{url_for('home')}}">conversion</a>
+                        
+            </nav>
+            
+            <form action="/" method="post">
+                <p>Feet to meters conversion</p>
+                <label>
+                    Feet: 
+                    <input type="text" name="feet"/>
+                </label>
+                <label>
+                    Inches: 
+                    <input type="text" name="inches"/>
+                </label>
+                <button type="submit">Submit</button>
+            </form>
+
+            
+            {% if meters == None %}
+
+            <p>Please input measurements</p>
+
+            {% else %}
+
+
+            <p>Your inputted measurements are equal to {{ meters }} meters</p>
+
+            {% endif %}
         
-        <form action="/" method="post">
-            <p>Feet to meters conversion</p>
-            <label>
-                Feet: 
-                <input type="text" name="feet"/>
-            </label>
-            <label>
-                Inches: 
-                <input type="text" name="inches"/>
-            </label>
-            <button type="submit">Submit</button>
-        </form>
 
-        
-        {% if meters == None %}
-
-        <p>Please input measurements</p>
-
-        {% else %}
-
-
-        <p>Your inputted measurements are equal to {{ meters }} meters</p>
-
-        {% endif %}
-        
+        </div>
     </body>
 </html>
