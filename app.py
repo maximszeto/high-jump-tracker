@@ -3,7 +3,7 @@ from logic import calculations, database
 
 app = Flask(__name__)
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/home", methods=["GET", "POST"])
 def home():
     if request.method == "POST":
         try:
