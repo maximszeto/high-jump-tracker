@@ -24,7 +24,7 @@ def home():
     
 @app.route("/stats", methods=["GET", "POST"])
 def stats():    
-    if request.method == "POST":
+    if request.method == "POST" and request.form.get("enter-log") == "high-jump":
         raw_jump = request.form.get("jump-height", "").strip()
         try:
             new_jump = float(raw_jump)
@@ -39,6 +39,9 @@ def stats():
         else:
             pass #flash("Jump must be positive.")
         return redirect(url_for("stats"))
+    
+    if request.method == "POST" and request.form.get("delete") == "delete-entry":
+        print("WORKING")
          
     return render_template("stats.html", log=database.highJumpLog)
 
