@@ -1,16 +1,30 @@
 # calculation functions that happen in the main file
 import time
-
+import json
+import database
 
 def addNewLog(jump, log):
 
         if jump <= 0.00:
             print("\nYou cant jump negative meters.")
             return False
-            
+        
+        id = 1
+
+        currentLog = database.loadData()
+
+        currentLog["jumps"].append({
+            "id": id,
+            "height": jump,
+            "date": time.strftime("%Y-%m-%d - %I:%M %p", time.localtime())
+        }) 
+
+        database.saveData()
+
         # at the very end of the adding section we will add a date no matter what the jump was
         log["height"].append(jump) 
         log["date"].append(time.strftime("%Y-%m-%d - %I:%M %p", time.localtime()))
+        ben = 0
         return True
 
 def calcPB(log):
