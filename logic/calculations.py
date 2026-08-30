@@ -17,15 +17,20 @@ def addNewLog(jump, log):
             "id": id,
             "height": jump,
             "date": time.strftime("%Y-%m-%d - %I:%M %p", time.localtime())
-        }) 
+        })
 
-        database.saveData()
+        
 
+        database.saveData(currentLog)
+
+        id += 1
         # at the very end of the adding section we will add a date no matter what the jump was
+        '''
         log["height"].append(jump) 
         log["date"].append(time.strftime("%Y-%m-%d - %I:%M %p", time.localtime()))
         ben = 0
-        return True
+        '''
+        #return True
 
 def calcPB(log):
     pb = 0
