@@ -123,7 +123,7 @@ def main():
                 time.sleep(2)
 
             # any time we add or delete a log we write to the high jump log file the changes we made
-            database.saveData()
+            # database.saveData()
 
             '''
             if the user inputs two we will print their training log by using an f string

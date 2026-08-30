@@ -22,9 +22,9 @@ def loadData():
     except FileNotFoundError:
         pass
 
-def saveData():
+def saveData(data):
     with open(file_path, "w") as file:
-        json.dump(highJumpLog, file)
+        json.dump(data, file)
 
 _loaded = loadData()
 if _loaded:
