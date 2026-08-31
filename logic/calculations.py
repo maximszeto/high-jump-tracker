@@ -3,34 +3,34 @@ import time
 import json
 import database
 
-def addNewLog(jump, log):
+#id = 1
+
+def addNewLog(jump):
 
         if jump <= 0.00:
             print("\nYou cant jump negative meters.")
             return False
-        
-        id = 1
+
+        #global id
 
         currentLog = database.loadData()
 
+        jumps = currentLog["jumps"]
+        
+        highest_id = max(
+            (jumpElement["id"] for jumpElement in jumps),
+            default=0
+        )
+
+        new_id = highest_id + 1
+        
         currentLog["jumps"].append({
-            "id": id,
+            "id": new_id,
             "height": jump,
             "date": time.strftime("%Y-%m-%d - %I:%M %p", time.localtime())
         })
 
-        
-
         database.saveData(currentLog)
-
-        id += 1
-        # at the very end of the adding section we will add a date no matter what the jump was
-        '''
-        log["height"].append(jump) 
-        log["date"].append(time.strftime("%Y-%m-%d - %I:%M %p", time.localtime()))
-        ben = 0
-        '''
-        #return True
 
 def calcPB(log):
     pb = 0
