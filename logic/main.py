@@ -70,7 +70,7 @@ def main():
                     newlog = float(input("\nIn meters what height did you achieve? "))
                     newlog = round(newlog, 2)
 
-                    calculations.addNewLog(newlog, highJumpLog)
+                    calculations.addNewLog(newlog)
                     
                 except ValueError:
                     print("Please input a number.\n")
