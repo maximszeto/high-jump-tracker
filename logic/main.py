@@ -108,7 +108,7 @@ def main():
                             print("\nNumbers only")
                             time.sleep(2)
                     
-                    except IndexError:
+                    except EnvironmentError:
                         print(f"\nThere is no jump #{deleteWhichJump}")
                         time.sleep(2)
 
