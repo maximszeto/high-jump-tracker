@@ -81,6 +81,8 @@ def deleteAllLogs(log):
 
     currentLog["jumps"] = []
 
+    database.saveData(currentLog)
+
     """    
     log["height"] = []
     log["date"] = []
