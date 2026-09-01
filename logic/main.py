@@ -88,7 +88,8 @@ def main():
                 '''
 
             elif addOrDelete == "2":
-                if highJumpLog["height"] != []:
+
+                if calculations.currentLog != {'jumps': []}:
                     os.system(clearScreen)
                     try:
                         calculations.showHJLog(highJumpLog)
