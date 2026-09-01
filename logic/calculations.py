@@ -92,7 +92,9 @@ def deleteAllLogs(log):
 
 def deleteLog(log, jump):
 
+    del currentLog["jumps"][int(jump) - 1]
 
+    database.saveData(currentLog)
 
     """
     jump = int(jump)
