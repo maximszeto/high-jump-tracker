@@ -5,6 +5,8 @@ import database
 
 #id = 1
 
+currentLog = database.loadData()
+
 def addNewLog(jump):
 
         if jump <= 0.00:
@@ -13,7 +15,7 @@ def addNewLog(jump):
 
         #global id
 
-        currentLog = database.loadData()
+        
 
         jumps = currentLog["jumps"]
         
@@ -67,24 +69,37 @@ def exitToMainMenu():
 
 def showHJLog(log):
     index = 1
+    print(currentLog)
+    """
     print("Here is your training log:\n")
     for jump, date in zip(log["height"], log["date"]):
         print(f"Jump #{index}: {jump:.2f}m. logged on {date}\n")
         index += 1 
+    """
 
 def deleteAllLogs(log):
+
+    currentLog["jumps"] = []
+
+    """    
     log["height"] = []
     log["date"] = []
     print("High jump log cleared")
     time.sleep(2)
+    """
 
 def deleteLog(log, jump):
+
+
+
+    """
     jump = int(jump)
     lastDeletedJump = log["height"][jump -1]
     del log["height"][jump - 1]
     del log["date"][jump - 1]
     print(f"\nJump {jump} ({lastDeletedJump:.2f}m) has been deleted.\n")
     time.sleep(2)
+    """
 
 def goalCalculation(goal, pb):
     if goal <= 0.00:
