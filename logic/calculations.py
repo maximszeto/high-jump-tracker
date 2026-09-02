@@ -34,7 +34,7 @@ def addNewLog(jump):
 
         database.saveData(currentLog)
 
-def calcPB(log):
+def calcPB():
     pb = 0
     pbDate = ""
     # since we zip the height and date lists together when we find the pb we use the same index 
@@ -46,7 +46,7 @@ def calcPB(log):
     print(f"Your Personal Best jump is {pb:.2f}m and it was logged on {pbDate}\n")
 
 
-def calcAvgHJ(log):
+def calcAvgHJ():
     index = 0
     averageHeight = 0
     for jump in log["height"]: 
@@ -67,7 +67,7 @@ def exitToMainMenu():
         if userExit == "e":
             break
 
-def showHJLog(log):
+def showHJLog():
     index = 1
     print(currentLog)
     """
@@ -77,7 +77,7 @@ def showHJLog(log):
         index += 1 
     """
 
-def deleteAllLogs(log):
+def deleteAllLogs():
 
     currentLog["jumps"] = []
 
@@ -90,7 +90,7 @@ def deleteAllLogs(log):
     time.sleep(2)
     """
 
-def deleteLog(log, jump):
+def deleteLog(jump):
 
     del currentLog["jumps"][int(jump) - 1]
 
