@@ -3,7 +3,7 @@ import os
 import time
 import calculations
 import database
-from database import highJumpLog
+
 
 clearScreen = ""
 if os.name == "nt":
@@ -14,9 +14,11 @@ else:
 
 
 # load previously saved data when we first run the app if there is any
+"""
 loadedData = database.loadData()
 highJumpLog.clear()
 highJumpLog.update(loadedData)
+"""
 
 # clears screen for visibility
 os.system(clearScreen)
@@ -92,23 +94,23 @@ def main():
                 if calculations.currentLog != {'jumps': []}:
                     os.system(clearScreen)
                     try:
-                        calculations.showHJLog(highJumpLog)
+                        calculations.showHJLog()
                         try:
                             deleteWhichJump = input("To delete a jump input the number or if you want to delete all jump type ALL: ")
                             # instead of looping through the list since we already have the index needed for deletion
                             # we just delete it right then and there
                             if deleteWhichJump == "ALL":
-                                calculations.deleteAllLogs(highJumpLog)
+                                calculations.deleteAllLogs()
                                 os.system(clearScreen) 
                                     
                             else:
-                                calculations.deleteLog(highJumpLog, deleteWhichJump)
+                                calculations.deleteLog(deleteWhichJump)
                                 os.system(clearScreen)
                         except ValueError:
                             print("\nNumbers only")
                             time.sleep(2)
                     
-                    except EnvironmentError:
+                    except IndexError:
                         print(f"\nThere is no jump #{deleteWhichJump}")
                         time.sleep(2)
 
@@ -134,8 +136,8 @@ def main():
 
         elif userInput == "2":
             os.system(clearScreen)
-            if highJumpLog["height"] != []:
-                calculations.showHJLog(highJumpLog)
+            if calculations.currentLog != {'jumps': []}:
+                calculations.showHJLog()
             else:
                 print("\nThere is nothing in your training log\n")
                 time.sleep(2)
@@ -156,8 +158,8 @@ def main():
         elif userInput == "3":
             os.system(clearScreen)
             if highJumpLog["height"] != []:
-                calculations.calcAvgHJ(highJumpLog)
-                calculations.calcPB(highJumpLog)
+                calculations.calcAvgHJ()
+                calculations.calcPB()
 
             else:
                 print("\nYou do not have any jumps logged\n")
