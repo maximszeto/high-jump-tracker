@@ -69,7 +69,11 @@ def exitToMainMenu():
 
 def showHJLog():
     index = 1
-    print(currentLog)
+    
+    for element in currentLog["jumps"]:
+        print(f"Jump #{index}: {currentLog["jumps"][index -1]["height"]}m logged on {currentLog["jumps"][index-1]["date"]}")
+        index += 1
+
     """
     print("Here is your training log:\n")
     for jump, date in zip(log["height"], log["date"]):
