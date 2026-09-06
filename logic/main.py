@@ -157,7 +157,7 @@ def main():
 
         elif userInput == "3":
             os.system(clearScreen)
-            if highJumpLog["height"] != []:
+            if calculations.currentLog != {'jumps': []}:
                 calculations.calcAvgHJ()
                 calculations.calcPB()
 
@@ -170,7 +170,7 @@ def main():
 
         elif userInput == "4":
             os.system(clearScreen)
-            if highJumpLog["height"] != []:    
+            if calculations.currentLog != {'jumps': []}:   
                 pb = 0
                 for jump in highJumpLog["height"]:
                     if jump > pb:
