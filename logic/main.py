@@ -21,24 +21,6 @@ highJumpLog.update(loadedData)
 """
 
 # clears screen for visibility
-os.system(clearScreen)
-
-
-while True:
-    askUserName = input("Welcome to Maxim's High jump App! Please enter your name: ").strip()
-    if not askUserName:
-        print("Please input a valid username")
-        time.sleep(2)
-        os.system(clearScreen)
-        continue
-    else:
-        print(f"Hello, {askUserName}! Thanks for using my High Jump App.")
-        break
-
-
-
-
-time.sleep(2)
 
 # main function controls the major functionings of the app
 def main():
