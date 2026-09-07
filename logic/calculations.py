@@ -49,11 +49,20 @@ def calcPB():
 def calcAvgHJ():
     index = 0
     averageHeight = 0
+
+    for jump in currentLog["jumps"]:
+        averageHeight += jump["height"]
+        index += 1
+    averageHeight = averageHeight/index
+    print(f"Your average jump height is {averageHeight:.2f} meters\n")
+
+    """
     for jump in log["height"]: 
         averageHeight += jump
         index += 1
     averageHeight = averageHeight/index
     print(f"Your average jump height is... {averageHeight:.2f} meters!\n")
+    """
 
 def calcGoal(userPB, goal):
     userProgress = round(userPB/goal, 2) * 100
