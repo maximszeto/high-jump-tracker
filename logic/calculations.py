@@ -39,12 +39,19 @@ def calcPB():
     pbDate = ""
     # since we zip the height and date lists together when we find the pb we use the same index 
     # and assign it to be the date of the pb
+    for jump in currentLog["jumps"]:
+        if jump["height"] > pb:
+            pb = jump["height"]
+            pbDate = jump["date"]
+    print(f"Your Personal best jump is {pb:.2f}m and it was logged on {pbDate}\n")
+
+    """
     for jump, date in zip(log["height"], log["date"]):
         if jump > pb:
             pb = jump
             pbDate = date
     print(f"Your Personal Best jump is {pb:.2f}m and it was logged on {pbDate}\n")
-
+    """
 
 def calcAvgHJ():
     index = 0
