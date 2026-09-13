@@ -43,15 +43,12 @@ def calcPB():
         if jump["height"] > pb:
             pb = jump["height"]
             pbDate = jump["date"]
-    print(f"Your Personal best jump is {pb:.2f}m and it was logged on {pbDate}\n")
 
-    """
-    for jump, date in zip(log["height"], log["date"]):
-        if jump > pb:
-            pb = jump
-            pbDate = date
-    print(f"Your Personal Best jump is {pb:.2f}m and it was logged on {pbDate}\n")
-    """
+    return pb, pbDate
+    
+    # print(f"Your Personal best jump is {pb:.2f}m and it was logged on {pbDate}\n")
+
+    
 
 def calcAvgHJ():
     index = 0
@@ -61,7 +58,9 @@ def calcAvgHJ():
         averageHeight += jump["height"]
         index += 1
     averageHeight = averageHeight/index
-    print(f"Your average jump height is {averageHeight:.2f} meters\n")
+
+    return averageHeight
+    #print(f"Your average jump height is {averageHeight:.2f} meters\n")
 
     """
     for jump in log["height"]: 
