@@ -140,8 +140,10 @@ def main():
         elif userInput == "3":
             os.system(clearScreen)
             if calculations.currentLog != {'jumps': []}:
-                calculations.calcAvgHJ()
-                calculations.calcPB()
+                HJPB, HJDate = calculations.calcPB()
+
+                print(f"Your average jump height is {calculations.calcAvgHJ():.2f} meters\n")
+                print(f"Your Personal best jump is {HJPB:.2f}m and it was logged on {HJDate}\n")
 
             else:
                 print("\nYou do not have any jumps logged\n")
