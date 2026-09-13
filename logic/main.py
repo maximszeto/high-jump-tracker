@@ -155,17 +155,15 @@ def main():
         elif userInput == "4":
             os.system(clearScreen)
             if calculations.currentLog != {'jumps': []}:   
-                pb = 0
-                for jump in highJumpLog["height"]:
-                    if jump > pb:
-                        pb = jump
-                
+                HJPB, HJDate = calculations.calcPB()
+
                 try:    
                     userGoal = float(input("\nWhat is your high jump height goal?: "))
-                    calculations.goalCalculation(userGoal, pb)
+                    calculations.goalCalculation(userGoal, HJPB)
                                 
                 except ValueError:
                     print("Please input a number.\n")
+                    
                 userExit = input("\nclick e to exit: ")
 
             else:
