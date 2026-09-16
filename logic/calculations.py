@@ -83,7 +83,7 @@ def exitToMainMenu():
             break
 
 def showHJLog():
-    index = 0
+    index = 1
     
     for element in currentLog["jumps"]:
         print(f"Jump #{index}: {currentLog["jumps"][index]["height"]}m logged on {currentLog["jumps"][index-1]["date"]}")
@@ -110,6 +110,10 @@ def deleteAllLogs():
     """
 
 def deleteLog(jump):
+    """
+    for element in currentLog["jumps"]:
+        element["id"] = pass
+    """
 
     del currentLog["jumps"][int(jump) - 1]
 
