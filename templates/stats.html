@@ -23,7 +23,7 @@
             
             <h2>High Jump Log</h2>
 
-            {% if log["height"]|length == 0 %}
+            {% if not log["jumps"] %}   
                 <p>No jumps have been logged yet</p>
             
             {% else %}
@@ -37,13 +37,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for i in range(log["height"]|length) %}
+                    {% for element in log["jumps"] %}
+                        
                     <tr>
                         <td>
-                            {{ log["height"][i] }}m
+                            {{ element["height"] }}m
                         </td>
                         <td>
-                            {{ log["date"][i] }}
+                            {{ element["date"] }}
+                        
                         </td>
                         <td>
                             <form>
