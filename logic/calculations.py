@@ -86,7 +86,7 @@ def showHJLog():
     index = 1
     
     for element in currentLog["jumps"]:
-        print(f"Jump #{index}: {currentLog["jumps"][index]["height"]}m logged on {currentLog["jumps"][index-1]["date"]}")
+        print(f"Jump #{index}: {currentLog["jumps"][index-1]["height"]}m logged on {currentLog["jumps"][index-1]["date"]}")
         index += 1
 
     """
@@ -110,14 +110,17 @@ def deleteAllLogs():
     """
 
 def deleteLog(jump):
-    """
-    for element in currentLog["jumps"]:
-        element["id"] = pass
-    """
+    
 
     del currentLog["jumps"][int(jump) - 1]
 
+    index = 1
+    for element in currentLog["jumps"]:
+        element["id"] = index
+        index += 1
+    
     database.saveData(currentLog)
+
 
     """
     jump = int(jump)
