@@ -1,7 +1,7 @@
 # calculation functions that happen in the main file
 import time
 import json
-import database
+from . import database
 
 #id = 1
 
