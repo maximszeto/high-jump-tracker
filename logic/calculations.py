@@ -83,10 +83,10 @@ def exitToMainMenu():
             break
 
 def showHJLog():
-    index = 1
+    index = 0
     
     for element in currentLog["jumps"]:
-        print(f"Jump #{index}: {currentLog["jumps"][index -1]["height"]}m logged on {currentLog["jumps"][index-1]["date"]}")
+        print(f"Jump #{index}: {currentLog["jumps"][index]["height"]}m logged on {currentLog["jumps"][index-1]["date"]}")
         index += 1
 
     """
