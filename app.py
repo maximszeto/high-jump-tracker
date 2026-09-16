@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
-from logic import calculations, database
+from logic import calculations
+from logic import database
 
 app = Flask(__name__)
 
@@ -32,18 +33,14 @@ def stats():
             #flash("Enter a valid numeric jump height.")
             return redirect(url_for("stats"))
             
-        ok = calculations.addNewLog(new_jump, database.highJumpLog)
-        if ok:
-            database.saveData()
-            #flash("Jump logged.")
-        else:
-            pass #flash("Jump must be positive.")
+        ok = calculations.addNewLog(new_jump)
+        
         return redirect(url_for("stats"))
     
     if request.method == "POST" and request.form.get("delete") == "delete-entry":
         print("WORKING")
          
-    return render_template("stats.html", log=database.highJumpLog)
+    return render_template("stats.html", log=calculations.currentLog)
 
 if __name__ == "__main__":
     app.run(debug=True)
