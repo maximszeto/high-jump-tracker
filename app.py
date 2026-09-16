@@ -37,9 +37,12 @@ def stats():
         
         return redirect(url_for("stats"))
     
-    if request.method == "POST" and request.form.get("delete") == "delete-entry":
-        print("WORKING")
-         
+    if request.method == "POST" and request.form.get("delete_id") is not None:
+        delete_id = int(request.form.get("delete_id"))
+        print(delete_id)
+        calculations.deleteLog(delete_id)
+
+
     return render_template("stats.html", log=calculations.currentLog)
 
 if __name__ == "__main__":
