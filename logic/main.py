@@ -1,8 +1,8 @@
 # High jump tracker v1.0 by Maxim Szeto
 import os
 import time
-import calculations
-import database
+from . import calculations
+from . import database
 
 
 clearScreen = ""
