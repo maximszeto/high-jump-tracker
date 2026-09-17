@@ -54,11 +54,13 @@ def calcAvgHJ():
     index = 0
     averageHeight = 0
 
-    for jump in currentLog["jumps"]:
-        averageHeight += jump["height"]
-        index += 1
-    averageHeight = averageHeight/index
+    if currentLog != {"jumps": []}:
+        for jump in currentLog["jumps"]:
+            averageHeight += jump["height"]
+            index += 1
+        averageHeight = averageHeight/index
 
+        
     return averageHeight
     #print(f"Your average jump height is {averageHeight:.2f} meters\n")
 
