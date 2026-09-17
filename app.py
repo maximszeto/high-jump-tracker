@@ -42,8 +42,9 @@ def stats():
         print(delete_id)
         calculations.deleteLog(delete_id)
 
-
-    return render_template("stats.html", log=calculations.currentLog)
+    pr, date = calculations.calcPB()
+    avg = calculations.calcAvgHJ()
+    return render_template("stats.html", log=calculations.currentLog, pr=pr, date=date, avg=avg)
 
 if __name__ == "__main__":
     app.run(debug=True)
