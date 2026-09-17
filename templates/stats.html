@@ -21,12 +21,16 @@
                 
             </form>
             
+            
             <h2>High Jump Log</h2>
 
             {% if not log["jumps"] %}   
                 <p>No jumps have been logged yet</p>
             
             {% else %}
+
+            <p>Average High Jump: {{ avg }}</p>
+            <p>PR High Jump: {{ pr }} logged on {{ date }}</p>
 
             <table class="jump-table">
                 <thead>
