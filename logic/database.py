@@ -1,12 +1,5 @@
 import os
 import json
-# holds all of the high jump logs
-highJumpLog = {
-    
-    "height": [],
-    "date": []
-    
-}
 
 # 1. Finds the folder where main.py lives
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -22,6 +15,6 @@ def loadData():
     except FileNotFoundError:
         pass
 
-def saveData():
+def saveData(data):
     with open(file_path, "w") as file:
-        json.dump(highJumpLog, file)
+        json.dump(data, file)

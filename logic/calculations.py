@@ -1,56 +1,76 @@
 # calculation functions that happen in the main file
 import time
+import json
+from . import database
 
+#id = 1
 
-def addNewLog(jump, log):
+currentLog = database.loadData()
+
+def addNewLog(jump):
 
         if jump <= 0.00:
             print("\nYou cant jump negative meters.")
-            time.sleep(2)
-            #continue
+            return False
 
-            # append each log into the height category of the high jump log
-        elif jump <= 1.00:
-            log["height"].append(jump)
-            print("\nAdded to log")
-            print(f"Good start. {jump:.2f} meters is good but you can do better\n")
-        elif jump <= 1.50:
-            log["height"].append(jump)
-            print("\nAdded to log")
-            print(f"that is pretty solid. {jump:.2f} meters is solid\n")
-        elif jump <= 2.00:
-            log["height"].append(jump)
-            print("\nAdded to log")
-            print(f"dang you jumping. {jump:.2f} meters is good\n")
-        elif jump >= 2.00:
-            log["height"].append(jump)
-            print("\nAdded to log")
-            print(f"Wowza. {jump:.2f} meters is amazing\n")
-                        
-        # at the very end of the adding section we will add a date no matter what the jump was
-        log["date"].append(time.strftime("%Y-%m-%d - %I:%M %p", time.localtime()))
+        #global id
 
+        
 
-def calcPB(log):
+        jumps = currentLog["jumps"]
+        
+        highest_id = max(
+            (jumpElement["id"] for jumpElement in jumps),
+            default=0
+        )
+
+        new_id = highest_id + 1
+        
+        currentLog["jumps"].append({
+            "id": new_id,
+            "height": jump,
+            "date": time.strftime("%Y-%m-%d - %I:%M %p", time.localtime())
+        })
+
+        database.saveData(currentLog)
+
+def calcPB():
     pb = 0
     pbDate = ""
     # since we zip the height and date lists together when we find the pb we use the same index 
     # and assign it to be the date of the pb
-    for jump, date in zip(log["height"], log["date"]):
-        if jump > pb:
-            pb = jump
-            pbDate = date
-    print(f"Your Personal Best jump is {pb:.2f}m and it was logged on {pbDate}\n")
+    for jump in currentLog["jumps"]:
+        if jump["height"] > pb:
+            pb = jump["height"]
+            pbDate = jump["date"]
 
+    return pb, pbDate
+    
+    # print(f"Your Personal best jump is {pb:.2f}m and it was logged on {pbDate}\n")
 
-def calcAvgHJ(log):
+    
+
+def calcAvgHJ():
     index = 0
     averageHeight = 0
+
+    if currentLog != {"jumps": []}:
+        for jump in currentLog["jumps"]:
+            averageHeight += jump["height"]
+            index += 1
+        averageHeight = averageHeight/index
+
+        
+    return averageHeight
+    #print(f"Your average jump height is {averageHeight:.2f} meters\n")
+
+    """
     for jump in log["height"]: 
         averageHeight += jump
         index += 1
     averageHeight = averageHeight/index
     print(f"Your average jump height is... {averageHeight:.2f} meters!\n")
+    """
 
 def calcGoal(userPB, goal):
     userProgress = round(userPB/goal, 2) * 100
@@ -64,26 +84,54 @@ def exitToMainMenu():
         if userExit == "e":
             break
 
-def showHJLog(log):
+def showHJLog():
     index = 1
+    
+    for element in currentLog["jumps"]:
+        print(f"Jump #{index}: {currentLog["jumps"][index-1]["height"]}m logged on {currentLog["jumps"][index-1]["date"]}")
+        index += 1
+
+    """
     print("Here is your training log:\n")
     for jump, date in zip(log["height"], log["date"]):
         print(f"Jump #{index}: {jump:.2f}m. logged on {date}\n")
         index += 1 
+    """
 
-def deleteAllLogs(log):
+def deleteAllLogs():
+
+    currentLog["jumps"] = []
+
+    database.saveData(currentLog)
+
+    """    
     log["height"] = []
     log["date"] = []
     print("High jump log cleared")
     time.sleep(2)
+    """
 
-def deleteLog(log, jump):
+def deleteLog(jump):
+    
+
+    del currentLog["jumps"][int(jump) - 1]
+
+    index = 1
+    for element in currentLog["jumps"]:
+        element["id"] = index
+        index += 1
+    
+    database.saveData(currentLog)
+
+
+    """
     jump = int(jump)
     lastDeletedJump = log["height"][jump -1]
     del log["height"][jump - 1]
     del log["date"][jump - 1]
     print(f"\nJump {jump} ({lastDeletedJump:.2f}m) has been deleted.\n")
     time.sleep(2)
+    """
 
 def goalCalculation(goal, pb):
     if goal <= 0.00:

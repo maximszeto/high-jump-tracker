@@ -1,9 +1,9 @@
 # High jump tracker v1.0 by Maxim Szeto
 import os
 import time
-import calculations
-import database
-from database import highJumpLog
+from . import calculations
+from . import database
+
 
 clearScreen = ""
 if os.name == "nt":
@@ -14,29 +14,13 @@ else:
 
 
 # load previously saved data when we first run the app if there is any
+"""
 loadedData = database.loadData()
 highJumpLog.clear()
 highJumpLog.update(loadedData)
+"""
 
 # clears screen for visibility
-os.system(clearScreen)
-
-
-while True:
-    askUserName = input("Welcome to Maxim's High jump App! Please enter your name: ").strip()
-    if not askUserName:
-        print("Please input a valid username")
-        time.sleep(2)
-        os.system(clearScreen)
-        continue
-    else:
-        print(f"Hello, {askUserName}! Thanks for using my High Jump App.")
-        break
-
-
-
-
-time.sleep(2)
 
 # main function controls the major functionings of the app
 def main():
@@ -70,7 +54,7 @@ def main():
                     newlog = float(input("\nIn meters what height did you achieve? "))
                     newlog = round(newlog, 2)
 
-                    calculations.addNewLog(newlog, highJumpLog)
+                    calculations.addNewLog(newlog)
                     
                 except ValueError:
                     print("Please input a number.\n")
@@ -88,20 +72,21 @@ def main():
                 '''
 
             elif addOrDelete == "2":
-                if highJumpLog["height"] != []:
+
+                if calculations.currentLog != {'jumps': []}:
                     os.system(clearScreen)
                     try:
-                        calculations.showHJLog(highJumpLog)
+                        calculations.showHJLog()
                         try:
                             deleteWhichJump = input("To delete a jump input the number or if you want to delete all jump type ALL: ")
                             # instead of looping through the list since we already have the index needed for deletion
                             # we just delete it right then and there
                             if deleteWhichJump == "ALL":
-                                calculations.deleteAllLogs(highJumpLog)
+                                calculations.deleteAllLogs()
                                 os.system(clearScreen) 
                                     
                             else:
-                                calculations.deleteLog(highJumpLog, deleteWhichJump)
+                                calculations.deleteLog(deleteWhichJump)
                                 os.system(clearScreen)
                         except ValueError:
                             print("\nNumbers only")
@@ -123,7 +108,7 @@ def main():
                 time.sleep(2)
 
             # any time we add or delete a log we write to the high jump log file the changes we made
-            database.saveData()
+            # database.saveData()
 
             '''
             if the user inputs two we will print their training log by using an f string
@@ -133,8 +118,8 @@ def main():
 
         elif userInput == "2":
             os.system(clearScreen)
-            if highJumpLog["height"] != []:
-                calculations.showHJLog(highJumpLog)
+            if calculations.currentLog != {'jumps': []}:
+                calculations.showHJLog()
             else:
                 print("\nThere is nothing in your training log\n")
                 time.sleep(2)
@@ -154,9 +139,11 @@ def main():
 
         elif userInput == "3":
             os.system(clearScreen)
-            if highJumpLog["height"] != []:
-                calculations.calcAvgHJ(highJumpLog)
-                calculations.calcPB(highJumpLog)
+            if calculations.currentLog != {'jumps': []}:
+                HJPB, HJDate = calculations.calcPB()
+
+                print(f"Your average jump height is {calculations.calcAvgHJ():.2f} meters\n")
+                print(f"Your Personal best jump is {HJPB:.2f}m and it was logged on {HJDate}\n")
 
             else:
                 print("\nYou do not have any jumps logged\n")
@@ -167,18 +154,16 @@ def main():
 
         elif userInput == "4":
             os.system(clearScreen)
-            if highJumpLog["height"] != []:    
-                pb = 0
-                for jump in highJumpLog["height"]:
-                    if jump > pb:
-                        pb = jump
-                
+            if calculations.currentLog != {'jumps': []}:   
+                HJPB, HJDate = calculations.calcPB()
+
                 try:    
                     userGoal = float(input("\nWhat is your high jump height goal?: "))
-                    calculations.goalCalculation(userGoal, pb)
+                    calculations.goalCalculation(userGoal, HJPB)
                                 
                 except ValueError:
                     print("Please input a number.\n")
+                    
                 userExit = input("\nclick e to exit: ")
 
             else:

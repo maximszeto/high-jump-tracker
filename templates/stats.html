@@ -6,29 +6,62 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='page-style.css') }}">
     </head>
     <body>
+        <div id="container">
+            <nav class="nav-buttons">
+                <a class="btn" href="{{url_for('stats')}}">log</a>
+                <a class="btn" href="{{url_for('home')}}">conversion</a>                
+            </nav>
 
-        <form action="/" method="post">
-            <label>
-                How high did you jump in meters?:  
-                <input type="text" name="jump-height"/>
-            </label>
-            <button type="submit">Submit</button>
+            <form action="/stats" method="post">
+                <label>
+                    How high did you jump in meters?:  
+                    <input type="text" name="jump-height"/>
+                </label>
+                <button type="submit" name="enter-log" value="high-jump">Submit</button>
+                
+            </form>
             
-        </form>
+            
+            <h2>High Jump Log</h2>
 
-        <table class="jump-table">
-            <thead>
-                <tr>
-                    <th>Jump Height</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1.72m</td>
-                    <td>August 12th</td>
-                </tr>
-            </tbody>
-        </table>
+            {% if not log["jumps"] %}   
+                <p>No jumps have been logged yet</p>
+            
+            {% else %}
+
+            <p>Average High Jump: {{ avg }}</p>
+            <p>PR High Jump: {{ pr }} logged on {{ date }}</p>
+
+            <table class="jump-table">
+                <thead>
+                    <tr>
+                        <th>Jump Height</th>
+                        <th>Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for element in log["jumps"] %}
+                        
+                    <tr>
+                        <td>
+                            {{ element["height"] }}m
+                        </td>
+                        <td>
+                            {{ element["date"] }}
+                        
+                        </td>
+                        <td>
+                            <form action="/stats" method="post">
+                                <button type="submit" name="delete_id" value="{{ element.id }}">delete entry</button>
+                            </form>
+                        
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
     </body>
 </html>
